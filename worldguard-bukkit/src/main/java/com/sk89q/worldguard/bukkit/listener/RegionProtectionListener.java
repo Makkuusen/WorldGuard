@@ -543,7 +543,7 @@ public class RegionProtectionListener extends AbstractListener {
         RegionQuery query = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
         Location location = vehicle.getLocation();
         LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
-        if (!query.testBuild(BukkitAdapter.adapt(location), localPlayer, Flags.RIDE, Flags.INTERACT)) {
+        if (!query.testBuild(BukkitAdapter.adapt(location), localPlayer, Flags.RIDE)) {
             event.setCancelled(true);
             DelegateEvent dummy = new UseEntityEvent(event, cause, vehicle);
             tellErrorMessage(dummy, cause, vehicle.getLocation(), "ride that");
@@ -561,7 +561,7 @@ public class RegionProtectionListener extends AbstractListener {
             if (!isWhitelisted(Cause.create(player), vehicle.getWorld(), false)) {
                 RegionQuery query = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
                 Location location = vehicle.getLocation();
-                if (!query.testBuild(BukkitAdapter.adapt(location), localPlayer, Flags.RIDE, Flags.INTERACT)) {
+                if (!query.testBuild(BukkitAdapter.adapt(location), localPlayer, Flags.RIDE)) {
                     long now = System.currentTimeMillis();
                     Long lastTime = WGMetadata.getIfPresent(player, DISEMBARK_MESSAGE_KEY, Long.class);
                     if (lastTime == null || now - lastTime >= LAST_MESSAGE_DELAY) {
